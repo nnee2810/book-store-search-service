@@ -1,0 +1,13 @@
+export interface EnvPayload {
+  ELASTICSEARCH_HOST: string
+  ELASTICSEARCH_PORT: number
+  ELASTICSEARCH_URL: string
+  ELASTICSEARCH_USERNAME: string
+  ELASTICSEARCH_PASSWORD: string
+
+  RABBITMQ_DEFAULT_USER: string
+  RABBITMQ_DEFAULT_PASS: string
+  RABBITMQ_HOST: string
+  RABBITMQ_PORT: number
+  RABBITMQ_URL: string
+}
