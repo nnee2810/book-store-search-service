@@ -9,14 +9,14 @@ import { EnvPayload } from "src/interfaces/env-payload.interface"
     ElasticsearchModule.registerAsync({
       inject: [ConfigService],
       useFactory: (configService: ConfigService<EnvPayload>) => ({
-        node: configService.get("ELASTICSEARCH_URL"),
+        node: configService.get("ES_URL"),
         auth: {
-          username: configService.get("ELASTICSEARCH_USERNAME"),
-          password: configService.get("ELASTICSEARCH_PASSWORD"),
+          username: configService.get("ES_USERNAME"),
+          password: configService.get("ES_PASSWORD"),
         },
       }),
     }),
   ],
   exports: [ElasticsearchModule],
 })
-export class ElasticModule {}
+export class EsModule {}

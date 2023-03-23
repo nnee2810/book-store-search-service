@@ -1,0 +1,38 @@
+version: "3.9"
+services:
+  es01:
+    image: elasticsearch:8.6.2
+    environment:
+      - ELASTICSEARCH_USERNAME=${ES_USERNAME}
+      - ELASTICSEARCH_PASSWORD=${ES_PASSWORD}
+      - cluster.name=${ES_CLUSTER_NAME}
+      - cluster.initial_master_nodes=${ES_CLUSTER_INITIAL_MASTER_NODES}
+      - node.name=${ES_NODE_NAME}
+      - bootstrap.memory_lock=${ES_BOOTSTRAP_MEMORY_LOCK}
+      - xpack.security.enabled=${ES_XPACK_SECURITY_ENABLED}
+      - node.store.allow_mmap=${ES_NODE_STORE_ALLOW_NMAP}
+      - ES_JAVA_OPTS=${ES_JAVA_OPTS}
+    ports:
+      - 9200:9200
+    volumes:
+      - es01:/usr/share/elasticsearch/data
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    networks:
+      - es-network
+
+  kibana:
+    image: kibana:8.6.2
+    ports:
+      - 5601:5601
+    depends_on:
+      - es01
+    networks:
+      - es-network
+
+volumes:
+  es01:
+networks:
+  es-network:
